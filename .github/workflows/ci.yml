@@ -23,7 +23,7 @@ jobs:
           -cover
 
   style:
-    name: Style Test
+    name: Style
     runs-on: ubuntu-latest
 
     steps:

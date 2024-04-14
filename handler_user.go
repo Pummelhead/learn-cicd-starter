@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/bootdotdev/learn-cicd-starter/internal/database"
@@ -25,11 +26,7 @@ func (cfg *apiConfig) handlerUsersCreate(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	apiKey, err := generateRandomSHA256Hash()
-	if err != nil {
-		respondWithError(w, http.StatusInternalServerError, "Couldn't gen apikey")
-		return
-	}
+	apiKey := os.Getenv("API_KEY")
 
 	err = cfg.DB.CreateUser(r.Context(), database.CreateUserParams{
 		ID:        uuid.New().String(),
